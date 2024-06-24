@@ -118,7 +118,8 @@ def generate_launch_description():
         executable='ackermann_mux',
         name='ackermann_mux',
         parameters=[LaunchConfiguration('mux_config')],
-        remappings=[('ackermann_cmd_out', 'ackermann_drive')]
+        remappings=[('ackermann_drive_out', 'ackermann_cmd')]
+        # remappings=[('ackermann_cmd_out', 'ackermann_drive')]
     )
     static_tf_node = Node(
         package='tf2_ros',
