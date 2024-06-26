@@ -16,18 +16,33 @@ joy_teleop:
       axis_mappings:
         drive-speed:
           axis: 1
-          scale: 5.0
+          scale: 1.0
           offset: 0.0
         drive-steering_angle:
           axis: 2
           scale: 0.34
           offset: 0.0
 
-    human_control:
+    human_control_slow:
       type: topic
       interface_type: ackermann_msgs/msg/AckermannDriveStamped
       topic_name: teleop
       deadman_buttons: [4]
+      axis_mappings:
+        drive-speed:
+          axis: 1
+          scale: 1.0
+          offset: 0.0
+        drive-steering_angle:
+          axis: 2
+          scale: 0.34
+          offset: 0.0
+
+    human_control_fast:
+      type: topic
+      interface_type: ackermann_msgs/msg/AckermannDriveStamped
+      topic_name: teleop
+      deadman_buttons: [6]
       axis_mappings:
         drive-speed:
           axis: 1
