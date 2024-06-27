@@ -10,3 +10,6 @@
 	path = teleop_tools
 	url = https://github.com/f1tenth/teleop_tools.git
 	branch = foxy-devel
+[submodule "f1tenth_algorithms"]
+	path = f1tenth_algorithms
+	url = https://github.com/cpsl-research/f1tenth_algorithms.git

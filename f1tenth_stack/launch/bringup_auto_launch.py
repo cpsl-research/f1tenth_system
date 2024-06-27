@@ -137,7 +137,7 @@ def generate_launch_description():
         arguments=['0.27', '0.0', '0.11', '0.0', '0.0', '0.0', 'base_link', 'laser']
     )
     auto_node = Node(
-        package='f1tenth_stack',
+        package='auto_py',
         executable='straight_control',
         name='straight_control',
         parameters=[LaunchConfiguration('auto_config')]

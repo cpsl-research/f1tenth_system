@@ -26,8 +26,6 @@ setup(
         'console_scripts': [
             'throttle_interpolator = f1tenth_stack.throttle_interpolator:main',
             'tf_publisher = f1tenth_stack.tf_publisher:main',
-            'straight_control = f1tenth_stack.autonomous.straight:main',
-            'wiggle_control = f1tenth_stack.autonomous.wiggle:main',
         ],
     },
 )
