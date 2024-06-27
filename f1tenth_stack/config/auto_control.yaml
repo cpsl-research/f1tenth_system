@@ -1,4 +1,4 @@
 auto_control:
-  ros_parameters:
+  ros__parameters:
     default:
       type: default

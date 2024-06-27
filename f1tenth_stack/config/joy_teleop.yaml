@@ -56,8 +56,8 @@ joy_teleop:
     autonomous_control:
       type: topic
       interface_type: std_msgs/msg/Int8
-      topic_name: autonomous
+      topic_name: auto_init
       deadman_buttons: [5]
       message_value:
         data:
-          value: 0
+          value: 5  # this should match the deadman button index
