@@ -138,8 +138,8 @@ def generate_launch_description():
     )
     auto_node = Node(
         package='auto_py',
-        executable='straight_control',
-        name='straight_control',
+        executable='wiggle_control',
+        name='wiggle_control',
         parameters=[LaunchConfiguration('auto_config')]
     )
 
