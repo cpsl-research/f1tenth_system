@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "f1tenth-system"
+version = "0.0.1"
+description = "Development of the F1Tenth autonomous driving system"
+authors = ["Spencer Hallyburton <spencer.hallyburton@duke.edu>"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/cpsl-research/f1tenth_system"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+]
+keywords = ["autonomy", "f1tenth"]
+
+[tool.poetry.dependencies]
+python = "~3.10"
