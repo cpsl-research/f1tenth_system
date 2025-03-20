@@ -1,5 +1,8 @@
 .install.stamp
 
+.vscode
+__pycache__
+
 # Prerequisites
 *.d
 

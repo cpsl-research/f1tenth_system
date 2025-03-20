@@ -7,9 +7,9 @@
 1. Install the virtual environment with `poetry install --no-root`
 1. Activate the virtual environemnt with `poetry shell`
 1. `cd` back to the project workspace (where you can see the `src` folder)
-1. Build the project with `python -m colcon build --symlink-install` (the `symlink-install` turns out to be important for path management)
+1. Build the project with `python -m colcon build --symlink-install`
 1. Source the project with `source install/setup.bash` or `source install/setup.zsh`
-1. Run your launch file, e.g., `ros2 launch mar_bringup <launch file here>`, for example: `ros2 launch mar_bringup vehiclesec_infra.launch.py`
+1. Run your launch file, e.g., `ros2 launch f1tenth_system <launch file here>`, for example: `ros2 launch f1tenth_system bringup_base_launch.py`
 
 
 ## Getting started
