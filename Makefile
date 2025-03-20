@@ -1,7 +1,7 @@
 NAME := f1tenth
 INSTALL_STAMP := .install.stamp
 POETRY := $(shell command -v poetry 2> /dev/null)
-PYFOLDERS := scripts
+PYFOLDERS := scripts f1tenth_stack f1tenth_algorithms
 .DEFAULT_GOAL := help
 
 .PHONY: help
