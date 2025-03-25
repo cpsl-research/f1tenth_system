@@ -48,5 +48,11 @@ build: check-env
 run_manual: check-env
 	ros2 launch f1tenth_stack bringup_base_launch.py
 
+run_straight: check-env
+	ros2 launch f1tenth_stack bringup_auto_straight_launch.py
+
+run_roomba: check-env
+	ros2 launch f1tenth_stack bringup_auto_roomba_launch.py
+
 run_wiggle: check-env
 	ros2 launch f1tenth_stack bringup_auto_wiggle_launch.py
