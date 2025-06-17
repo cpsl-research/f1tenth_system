@@ -3,9 +3,9 @@
 
 ## Building the ROS project
 
-1. Configure your poetry projects to be able to use the system packages with `poetry config virtualenvs.options.system-site-packages true`. This must be set BEFORE the poetry project is installed.
-1. Install the virtual environment with `poetry install --no-root`
-1. Activate the virtual environemnt with `poetry shell`
+1. Configure your project to be able to use the system packages with `uv venv --system-site-packages`. This must be set BEFORE the project is installed.
+1. Install the virtual environment with `uv sync`
+1. Activate the virtual environemnt with `sourace .venv/bin/activate`
 1. `cd` back to the project workspace (where you can see the `src` folder)
 1. Build the project with `python -m colcon build --symlink-install`
 1. Source the project with `source install/setup.bash` or `source install/setup.zsh`
