@@ -9,7 +9,8 @@
 1. `cd` back to the project workspace (where you can see the `src` folder)
 1. Build the project with `python -m colcon build --symlink-install`
 1. Source the project with `source install/setup.bash` or `source install/setup.zsh`
-1. Run your launch file, e.g., `ros2 launch f1tenth_system <launch file here>`, for example: `ros2 launch f1tenth_system bringup_base_launch.py`
+1. Run your launch file, e.g., `ros2 launch f1tenth_bringup <launch file here>`, for example: `ros2 launch f1tenth_bringup bringup_base_launch.py`
+1. Run the `rviz` visualization with `ros2 launch f1tenth_bringup rviz_node_launch.py`
 
 
 ## Getting started
@@ -19,7 +20,7 @@ This is the top level for `f1tenth-system` project. The `Makefile` has useful co
 - `make build` -- builds the ROS2 project with `colcon` and sources the paths (assuming `zsh` for the shell)
 - `make run_manual` -- Runs the manual-only mode (i.e., no option for autonomous mode)
 - `make run_wiggle` -- Runs the wiggle open-loop control mode (i.e. the S-curve)
-
+- `make run_fo1lower` -- Runs the follower model
 
 ## Troubleshooting
 

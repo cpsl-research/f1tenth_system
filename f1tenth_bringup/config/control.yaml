@@ -1,0 +1,4 @@
+control:
+  ros__parameters:
+    default:
+      type: default

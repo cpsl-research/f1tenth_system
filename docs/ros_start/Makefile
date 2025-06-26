@@ -27,21 +27,6 @@ check-uv:
 		exit 1; \
 	fi
 
-
-# check-env: check-uv
-# 	@uv env info --path > /dev/null 2>&1 || { echo "UV environment is not activated, \
-# 	run 'make activate' first, then go back two directories"; exit 1; } \
-
-
-# activate: check-uve
-# 	@if uv env info --path > /dev/null 2>&1; then \
-# 		echo "UV environment is activated."; \
-# 	else \
-# 	    echo "UV environment is not activated. Activating..."; \
-# 		cd src/f1tenth_system; \
-# 		source .venv/bin/activate || { echo "Failed to activate UV environment."; exit 1; } \
-# 	fi
-
 .PHONY: build
 build:
 	cd src/f1tenth_system; \

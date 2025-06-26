@@ -9,6 +9,7 @@ Panels:
         - /Grid1
         - /LaserScan1
         - /Detection3DArray1
+        - /BoxTrackArray1
       Splitter Ratio: 0.5
     Tree Height: 845
   - Class: rviz_common/Selection
@@ -101,6 +102,25 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /detections_3d
       Value: true
+    - Alpha: 1
+      Class: avstack_msgs_rviz_plugins/BoxTrackArray
+      Color: 0; 170; 0
+      Enabled: true
+      Line Width: 0.05000000074505806
+      Name: BoxTrackArray
+      Namespaces:
+        box_track: true
+        id: true
+      Only Edge: false
+      Show Identifier: true
+      Show Score: false
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /tracks_3d
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -162,10 +182,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9503980278968811
+      Pitch: 0.8703980445861816
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.1253979206085205
+      Yaw: 1.1903979778289795
     Saved: ~
 Window Geometry:
   Displays:

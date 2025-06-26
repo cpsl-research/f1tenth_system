@@ -48,6 +48,15 @@ def generate_launch_description():
     percep_config = os.path.join(
         get_package_share_directory("f1tenth_bringup"), "config", "percep.yaml"
     )
+    track_config = os.path.join(
+        get_package_share_directory("f1tenth_bringup"), "config", "tracking.yaml"
+    )
+    planning_config = os.path.join(
+        get_package_share_directory("f1tenth_bringup"), "config", "planning.yaml"
+    )
+    control_config = os.path.join(
+        get_package_share_directory("f1tenth_bringup"), "config", "control.yaml"
+    )
 
     joy_la = DeclareLaunchArgument(
         "joy_config",
@@ -79,8 +88,33 @@ def generate_launch_description():
         default_value=percep_config,
         description="Descriptions for perception config",
     )
+    track_la = DeclareLaunchArgument(
+        "track_config",
+        default_value=track_config,
+        description="Descriptions for tracking config",
+    )
+    planning_la = DeclareLaunchArgument(
+        "planning_config",
+        default_value=planning_config,
+        description="Descriptions for planning config",
+    )
+    control_la = DeclareLaunchArgument(
+        "control_config",
+        default_value=control_config,
+        description="Descriptions for control config",
+    )
 
-    ld = LaunchDescription([joy_la, vesc_la, sensors_la, mux_la, auto_la, percep_la])
+    ld = LaunchDescription([
+        joy_la,
+        vesc_la,
+        sensors_la,
+        mux_la,
+        auto_la,
+        percep_la,
+        track_la,
+        planning_la,
+        control_la,
+    ])
 
     joy_node = Node(
         package="joy",
@@ -162,31 +196,24 @@ def generate_launch_description():
     )
 
     # object tracking from 3D boxes
-    # track_lidar_node = Node(
-    #     package="avstack_bridge",
-    #     executable="boxtracker3d",
-    #     name="tracking_3d",
-    #     parameters=[LaunchConfiguration("tracking_config")],
-    #     # remappings=[
-    #     #     ("tracks_3d", trk_topic),
-    #     # ],
-    #     arguments=["--ros-args", "--log-level", "INFO"],
-    # )
+    track_lidar_node = Node(
+        package="avstack_tracking",
+        executable="box3d_tracker",
+        name="tracking_3d",
+        parameters=[LaunchConfiguration("track_config")],
+        arguments=["--ros-args", "--log-level", "INFO"],
+    )
 
-    # # motion planning node
-    # planning_node = Node(
-    #     package="auto_py",
-    #     executable="planning",
-    #     name="planning",
-    #     parameters=[LaunchConfiguration("planning_config")],
-    # )
+    # motion planning node
+    # not yet...
 
-    # auto_node = Node(
-    #     package="auto_py",
-    #     executable="follower_control",
-    #     name="follower_control",
-    #     parameters=[LaunchConfiguration("auto_config")],
-    # )
+    # control node
+    control_node = Node(
+        package="auto_py",
+        executable="follower_control",
+        name="follower_control",
+        parameters=[LaunchConfiguration("control_config")],
+    )
 
     # finalize
     ld.add_action(joy_node)
@@ -199,5 +226,7 @@ def generate_launch_description():
     ld.add_action(ackermann_mux_node)
     ld.add_action(static_tf_node)
     ld.add_action(percep_lidar_node)
+    ld.add_action(track_lidar_node)
+    ld.add_action(control_node)
 
     return ld
