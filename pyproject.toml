@@ -14,7 +14,12 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
 ]
-dependencies = ["setuptools<71"]
+dependencies = [
+    "setuptools<71",
+    "avstack-core",
+    "scikit-learn>1.0",
+    "ros2_numpy",
+]
 
 [project.urls]
 Repository = "https://github.com/cpsl-research/f1tenth_system"
@@ -35,6 +40,9 @@ test = [
 [tool.uv]
 default-groups = ["test"]
 package = false
+
+[tool.uv.sources]
+avstack-core = { path = "f1tenth_algorithms/submodules/avstack-core", editable = true }
 
 [build-system]
 requires = ["hatchling"]

@@ -31,19 +31,22 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     joy_teleop_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "joy_teleop.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "joy_teleop.yaml"
     )
     vesc_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "vesc.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "vesc.yaml"
     )
     sensors_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "sensors.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "sensors.yaml"
     )
     mux_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "mux.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "mux.yaml"
     )
     auto_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "auto_control.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "auto_control.yaml"
+    )
+    percep_config = os.path.join(
+        get_package_share_directory("f1tenth_bringup"), "config", "percep.yaml"
     )
 
     joy_la = DeclareLaunchArgument(
@@ -71,8 +74,13 @@ def generate_launch_description():
         default_value=auto_config,
         description="Descriptions for autonomous mode config",
     )
+    percep_la = DeclareLaunchArgument(
+        "percep_config",
+        default_value=percep_config,
+        description="Descriptions for perception config",
+    )
 
-    ld = LaunchDescription([joy_la, vesc_la, sensors_la, mux_la, auto_la])
+    ld = LaunchDescription([joy_la, vesc_la, sensors_la, mux_la, auto_la, percep_la])
 
     joy_node = Node(
         package="joy",
@@ -130,12 +138,55 @@ def generate_launch_description():
         name="static_baselink_to_laser",
         arguments=["0.27", "0.0", "0.11", "0.0", "0.0", "0.0", "base_link", "laser"],
     )
-    auto_node = Node(
-        package="auto_py",
-        executable="roomba_control",
-        name="roomba_control",
-        parameters=[LaunchConfiguration("auto_config")],
+
+    # object detection from 2D images
+    # percep_camera_node = Node(
+    #     package="avstack_bridge",
+    #     executable="mmdetection2d",
+    #     name="perception_2d",
+    #     parameters=[LaunchConfiguration("percep_config")],
+    #     # remappings=[
+    #     #     ("point_cloud", "lidar0"),
+    #     #     ("detections_3d", det_topic),
+    #     # ],
+    #     arguments=["--ros-args", "--log-level", "INFO"],
+    # )
+
+    # object detection from 3D point clouds
+    percep_lidar_node = Node(
+        package="avstack_perception",
+        executable="laserscan_box_detection",
+        name="perception_lidar",
+        parameters=[LaunchConfiguration("percep_config")],
+        arguments=["--ros-args", "--log-level", "INFO"],
     )
+
+    # object tracking from 3D boxes
+    # track_lidar_node = Node(
+    #     package="avstack_bridge",
+    #     executable="boxtracker3d",
+    #     name="tracking_3d",
+    #     parameters=[LaunchConfiguration("tracking_config")],
+    #     # remappings=[
+    #     #     ("tracks_3d", trk_topic),
+    #     # ],
+    #     arguments=["--ros-args", "--log-level", "INFO"],
+    # )
+
+    # # motion planning node
+    # planning_node = Node(
+    #     package="auto_py",
+    #     executable="planning",
+    #     name="planning",
+    #     parameters=[LaunchConfiguration("planning_config")],
+    # )
+
+    # auto_node = Node(
+    #     package="auto_py",
+    #     executable="follower_control",
+    #     name="follower_control",
+    #     parameters=[LaunchConfiguration("auto_config")],
+    # )
 
     # finalize
     ld.add_action(joy_node)
@@ -147,6 +198,6 @@ def generate_launch_description():
     ld.add_action(urg_node)
     ld.add_action(ackermann_mux_node)
     ld.add_action(static_tf_node)
-    ld.add_action(auto_node)
+    ld.add_action(percep_lidar_node)
 
     return ld

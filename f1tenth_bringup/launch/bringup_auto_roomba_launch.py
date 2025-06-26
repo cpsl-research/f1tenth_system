@@ -31,19 +31,19 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     joy_teleop_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "joy_teleop.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "joy_teleop.yaml"
     )
     vesc_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "vesc.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "vesc.yaml"
     )
     sensors_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "sensors.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "sensors.yaml"
     )
     mux_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "mux.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "mux.yaml"
     )
     auto_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "auto_control.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "auto_control.yaml"
     )
 
     joy_la = DeclareLaunchArgument(
@@ -132,8 +132,8 @@ def generate_launch_description():
     )
     auto_node = Node(
         package="auto_py",
-        executable="wiggle_control",
-        name="wiggle_control",
+        executable="roomba_control",
+        name="roomba_control",
         parameters=[LaunchConfiguration("auto_config")],
     )
 

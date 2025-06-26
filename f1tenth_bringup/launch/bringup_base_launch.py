@@ -31,16 +31,16 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     joy_teleop_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "joy_teleop.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "joy_teleop.yaml"
     )
     vesc_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "vesc.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "vesc.yaml"
     )
     sensors_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "sensors.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "sensors.yaml"
     )
     mux_config = os.path.join(
-        get_package_share_directory("f1tenth_stack"), "config", "mux.yaml"
+        get_package_share_directory("f1tenth_bringup"), "config", "mux.yaml"
     )
 
     joy_la = DeclareLaunchArgument(
@@ -102,12 +102,12 @@ def generate_launch_description():
         name="throttle_interpolator",
         parameters=[LaunchConfiguration("vesc_config")],
     )
-    # urg_node = Node(
-    #    package='urg_node',
-    #    executable='urg_node_driver',
-    #    name='urg_node',
-    #    parameters=[LaunchConfiguration('sensors_config')]
-    # )
+    urg_node = Node(
+       package='urg_node',
+       executable='urg_node_driver',
+       name='urg_node',
+       parameters=[LaunchConfiguration('sensors_config')]
+    )
     ackermann_mux_node = Node(
         package="ackermann_mux",
         executable="ackermann_mux",
@@ -122,6 +122,7 @@ def generate_launch_description():
         name="static_baselink_to_laser",
         arguments=["0.27", "0.0", "0.11", "0.0", "0.0", "0.0", "base_link", "laser"],
     )
+    
 
     # finalize
     ld.add_action(joy_node)
@@ -129,8 +130,8 @@ def generate_launch_description():
     ld.add_action(ackermann_to_vesc_node)
     ld.add_action(vesc_to_odom_node)
     ld.add_action(vesc_driver_node)
-    # ld.add_action(throttle_interpolator_node)
-    # ld.add_action(urg_node)
+    ld.add_action(throttle_interpolator_node)
+    ld.add_action(urg_node)
     ld.add_action(ackermann_mux_node)
     ld.add_action(static_tf_node)
 

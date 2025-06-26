@@ -33,7 +33,7 @@ check-uv:
 # 	run 'make activate' first, then go back two directories"; exit 1; } \
 
 
-# activate: check-uv
+# activate: check-uve
 # 	@if uv env info --path > /dev/null 2>&1; then \
 # 		echo "UV environment is activated."; \
 # 	else \
@@ -48,32 +48,40 @@ build:
 	source .venv/bin/activate || { echo "Failed to activate UV environment."; exit 1; }; \
 	cd ../..; \
 	python -m colcon build --symlink-install; \
-	source install/setup.zsh \
 
 .PHONY: run_manual
 run_manual:
+	source install/setup.zsh \
 	cd src/f1tenth_system; \
 	source .venv/bin/activate || { echo "Failed to activate UV environment."; exit 1; }; \
 	cd ../..; \
-	ros2 launch f1tenth_stack bringup_base_launch.py
+	ros2 launch f1tenth_bringup bringup_base_launch.py
 
 .PHONY: run_straight
 run_straight:
+	source install/setup.zsh \
 	cd src/f1tenth_system; \
 	source .venv/bin/activate || { echo "Failed to activate UV environment."; exit 1; }; \
 	cd ../..; \
-	ros2 launch f1tenth_stack bringup_auto_straight_launch.py
+	ros2 launch f1tenth_bringup bringup_auto_straight_launch.py
 
 .PHONY: run_roomba
 run_roomba:
+	source install/setup.zsh \
 	cd src/f1tenth_system; \
 	source .venv/bin/activate || { echo "Failed to activate UV environment."; exit 1; }; \
 	cd ../..; \
-	ros2 launch f1tenth_stack bringup_auto_roomba_launch.py
+	ros2 launch f1tenth_bringup bringup_auto_roomba_launch.py
 
 .PHONY: run_wiggle
 run_wiggle:
+	source install/setup.zsh \
+	cd src/f1tenth_system; \
+
+.PHONY: run_follower
+run_follower:
+	source install/setup.zsh \
 	cd src/f1tenth_system; \
 	source .venv/bin/activate || { echo "Failed to activate UV environment."; exit 1; }; \
 	cd ../..; \
-	ros2 launch f1tenth_stack bringup_auto_wiggle_launch.py
+	ros2 launch f1tenth_bringup bringup_auto_follower_launch.py
