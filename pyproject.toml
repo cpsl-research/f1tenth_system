@@ -16,7 +16,7 @@ classifiers = [
 ]
 dependencies = [
     "setuptools<71",
-    "avstack-core",
+    "avstack-core[percep]",
     "scikit-learn>1.0",
     "ros2_numpy",
 ]
