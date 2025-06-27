@@ -1,7 +1,10 @@
-
-
+import os
+import sys
 from launch import LaunchDescription
-from .utils import get_sub_launch_description
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path)
+from utils import get_sub_launch_description
 
 
 def generate_launch_description():
@@ -11,9 +14,9 @@ def generate_launch_description():
     )
 
     # camera sensor
-    realsense_nodes = get_sub_launch_description(
-        "f1tenth_bringup", ["launch", "sensors"], "realsense_launch.py",
-    )
+    # realsense_nodes = get_sub_launch_description(
+    #     "f1tenth_bringup", ["launch", "sensors"], "realsense_launch.py",
+    # )
 
     # lidar sensor
     hokuyo_nodes =get_sub_launch_description(
@@ -38,7 +41,7 @@ def generate_launch_description():
     return LaunchDescription(
         [
             base_nodes,
-            realsense_nodes,
+            # realsense_nodes,
             hokuyo_nodes,
             stack_nodes,
             muxer_nodes,

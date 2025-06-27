@@ -48,16 +48,16 @@ def generate_launch_description():
 
 
     # object detection from 2D images
-    percep_camera_node = Node(
-        package="avstack_perception",
-        executable="mmdetection2d",
-        name="perception_2d",
-        remappings=[
-            ("image", "/robot1/camera/color/image_raw"),
-        ],
-        parameters=[LaunchConfiguration("percep_config")],
-        arguments=["--ros-args", "--log-level", "INFO"],
-    )
+    # percep_camera_node = Node(
+    #     package="avstack_perception",
+    #     executable="mmdetection2d",
+    #     name="perception_2d",
+    #     remappings=[
+    #         ("image", "/robot1/camera/color/image_raw"),
+    #     ],
+    #     parameters=[LaunchConfiguration("percep_config")],
+    #     arguments=["--ros-args", "--log-level", "INFO"],
+    # )
 
     # object detection from 3D point clouds
     percep_lidar_node = Node(
@@ -69,13 +69,13 @@ def generate_launch_description():
     )
 
     # object tracking from 2D boxes
-    track_camera_node = Node(
-        package="avstack_tracking",
-        executable="box2d_tracker",
-        name="tracking_2d",
-        parameters=[LaunchConfiguration("track_config")],
-        arguments=["--ros-args", "--log-level", "INFO"],
-    )
+    # track_camera_node = Node(
+    #     package="avstack_tracking",
+    #     executable="box2d_tracker",
+    #     name="tracking_2d",
+    #     parameters=[LaunchConfiguration("track_config")],
+    #     arguments=["--ros-args", "--log-level", "INFO"],
+    # )
 
     # object tracking from 3D boxes
     track_lidar_node = Node(
@@ -99,9 +99,9 @@ def generate_launch_description():
     )
 
     # add nodes
-    ld.add_action(percep_camera_node)
+    # ld.add_action(percep_camera_node)
     ld.add_action(percep_lidar_node)
-    ld.add_action(track_camera_node)
+    # ld.add_action(track_camera_node)
     ld.add_action(track_lidar_node)
     ld.add_action(control_node)
 

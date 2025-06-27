@@ -1,5 +1,11 @@
+import os
+import sys
 from launch import LaunchDescription
-from .utils import get_sub_launch_description
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path)
+from utils import get_sub_launch_description
+
 
 
 def generate_launch_description():
