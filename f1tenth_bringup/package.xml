@@ -12,6 +12,7 @@
   <exec_depend>tf2_sensor_msgs</exec_depend>
 
   <exec_depend>auto_py</exec_depend>
+  <exec_depend>detection_visualizer</exec_depend>
   <exec_depend>f1tenth_stack</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>

@@ -20,7 +20,17 @@ def generate_launch_description():
         description="Descriptions for perception config",
     )
 
-    ld = LaunchDescription([percep_la])
+    track_config = os.path.join(
+        get_package_share_directory("f1tenth_bringup"), "config", "tracking.yaml"
+    )
+
+    track_la = DeclareLaunchArgument(
+        "track_config",
+        default_value=track_config,
+        description="Descriptions for tracking config",
+    )
+
+    ld = LaunchDescription([percep_la, track_la])
 
 
     # object detection from 2D images
@@ -36,15 +46,16 @@ def generate_launch_description():
     )
 
     # tracks from 2D boxes
-    # track_camera_node = Node(
-    #     package="avstack_tracking",
-    #     executable="box2d_tracker",
-    #     name="tracking_2d",
-    #     parameters=[LaunchConfiguration("track_config")],
-    #     arguments=["--ros-args", "--log-level", "INFO"],
-    # )
+    track_camera_node = Node(
+        package="avstack_tracking",
+        executable="box2d_tracker",
+        name="tracking_2d",
+        parameters=[LaunchConfiguration("track_config")],
+        arguments=["--ros-args", "--log-level", "INFO"],
+    )
 
     # add nodes
     ld.add_action(percep_camera_node)
+    ld.add_action(track_camera_node)
 
     return ld
